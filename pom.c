@@ -56,18 +56,9 @@ void displayTime(int num_stars) { // TODO: make enum status
     printf("%sDone working! Take a break for %d minutes!%s\n", KGRN, REST_TIME, KWHT);
   }
   else {
-    char * stars = malloc(sizeof(char) * WORK_TIME);
-    int i = 0;
-    for (; i < num_stars; i++) { // TODO : more efficient way??
-      stars[i] = '*';
-    }
-    for (; i < WORK_TIME; i++) {
-      stars[i] = '-';
-    }
     printf("Progress: %s%d min %sout of %s%d min%s\n\n", KGRN, num_stars, KWHT, KRED, WORK_TIME, KWHT);
     printf("[ %s%.*s%s%.*s %s]\n", KGRN, num_stars, "*************************", KRED,
     (WORK_TIME - num_stars), "-------------------------", KWHT);
-    free(stars);
   }
 }
 
