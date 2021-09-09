@@ -14,6 +14,11 @@
 #define NUM_CYCLES 4 // number of cycles before a longer break
 #define BREAK_TIME 20 // time (min) to rest after NUM_CYCLES
 
+/*    COLOR CONSTANTS   */
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KWHT  "\x1B[37m"
+
 /*    FUNCTIONS         */
 
 /**
@@ -48,7 +53,7 @@ void displayTime(int num_stars) { // TODO: make enum status
   fflush(stdout); // TODO : necessary??
   system("clear");
   if (num_stars == WORK_TIME) { // TODO : add audio or something
-    printf("Done working! Take a break for %d minutes!\n", REST_TIME);
+    printf("%sDone working! Take a break for %d minutes!%s\n", KGRN, REST_TIME, KWHT);
   }
   else {
     char * stars = malloc(sizeof(char) * WORK_TIME);
@@ -59,8 +64,9 @@ void displayTime(int num_stars) { // TODO: make enum status
     for (; i < WORK_TIME; i++) {
       stars[i] = '-';
     }
-    printf("Progress: %d min out of %d min\n\n", num_stars, WORK_TIME);
-    printf("[ %s ]\n", stars);
+    printf("Progress: %s%d min %sout of %s%d min%s\n\n", KGRN, num_stars, KWHT, KRED, WORK_TIME, KWHT);
+    printf("[ %s%.*s%s%.*s %s]\n", KGRN, num_stars, "*************************", KRED,
+    (WORK_TIME - num_stars), "-------------------------", KWHT);
     free(stars);
   }
 }
@@ -71,6 +77,7 @@ int main(int argc, char *argv[]) {
   time_t currTime = startTime;
   time_t timePassed = 0;
   system("clear");
+  //printf("%stest%st2\n", KRED, KGRN);
   displayTime(0);
   // program loop:
   while(1) {
